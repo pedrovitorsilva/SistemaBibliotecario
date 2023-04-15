@@ -77,8 +77,15 @@ class AlunoController {
   // Cria um novo Aluno
   async create(req, res) {
     const schema = Yup.object().shape({
-      email: Yup.string().email().required("Preencher E-mail obrigatório"),
-      cpf: Yup.string().required("Preencher Cpf é obrigatório"),
+      email: Yup.string()
+        .email("E-mail inválido")
+        .required("Obrigatório preencher e-mail"),
+      cpf: Yup.string()
+        .matches(
+          /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
+          "CPF deve estar no formato xxx.xxx.xxx-xx"
+        )
+        .required("Preencher Cpf é obrigatório"),
       telefone: Yup.string().required("Preencher Telefone é obrigatório"),
       endereco: Yup.string().required("Preencher Endereço é obrigatório"),
       nome: Yup.string().required("Preencher Nome é obrigatório"),
@@ -88,30 +95,31 @@ class AlunoController {
 
     try {
       await schema.validate(req.body, { abortEarly: false });
+
+      const newAluno = await Aluno.create(req.body);
+      return res.status(201).json(newAluno);
     } catch (e) {
-      const validationErrors = e.inner.map((error) => ({
+      const lista_erros = e.inner.map((error) => ({
         campo: error.path,
         mensagem: error.message,
       }));
 
-      return res
-        .status(400)
-        .json({ error: "Erro de validação", detalhes: validationErrors });
+      return res.status(400).json({ error: "Erro", detalhes: lista_erros });
     }
-    /* if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: "Error on validate schema" });
-    } */
-
-    const newAluno = await Aluno.create(req.body);
-
-    return res.status(201).json(newAluno);
   }
 
   // Atualiza um Aluno
   async update(req, res) {
     const schema = Yup.object().shape({
-      email: Yup.string().email().required("Preencher E-mail obrigatório"),
-      cpf: Yup.string().required("Preencher Cpf é obrigatório"),
+      email: Yup.string()
+        .email("E-mail inválido")
+        .required("Obrigatório preencher e-mail"),
+      cpf: Yup.string()
+        .matches(
+          /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
+          "CPF deve estar no formato xxx.xxx.xxx-xx"
+        )
+        .required("Preencher Cpf é obrigatório"),
       telefone: Yup.string().required("Preencher Telefone é obrigatório"),
       endereco: Yup.string().required("Preencher Endereço é obrigatório"),
       nome: Yup.string().required("Preencher Nome é obrigatório"),
@@ -131,10 +139,6 @@ class AlunoController {
         .status(400)
         .json({ error: "Erro de validação", detalhes: validationErrors });
     }
-
-    /* if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: "Error on validate schema" });
-    } */
 
     const aluno = await Aluno.findByPk(req.params.matricula);
 
