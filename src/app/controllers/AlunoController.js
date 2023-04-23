@@ -93,16 +93,38 @@ class AlunoController {
       senha: Yup.number().integer().required("Preencher Senha obrigatório"),
     });
 
+    let lista_erros = [];
+
     try {
       await schema.validate(req.body, { abortEarly: false });
 
       const newAluno = await Aluno.create(req.body);
       return res.status(201).json(newAluno);
     } catch (e) {
-      const lista_erros = e.inner.map((error) => ({
-        campo: error.path,
-        mensagem: error.message,
-      }));
+      // Erros de campos não preenchidos
+
+      if (e.name === "ValidationError") {
+        const erros_validacao = e.inner.map((error) => ({
+          campo: error.path,
+          mensagem: error.message,
+        }));
+        lista_erros = [...lista_erros, ...erros_validacao];
+      }
+
+      // Erros de campos já existentes
+
+      if (e.name === "SequelizeUniqueConstraintError") {
+        if (e.fields.cpf) {
+          lista_erros.push({ campo: "cpf", mensagem: "CPF já existente" });
+        }
+
+        if (e.fields.PRIMARY) {
+          lista_erros.push({
+            campo: "matricula",
+            mensagem: "Matrícula já existente",
+          });
+        }
+      }
 
       return res.status(400).json({ error: "Erro", detalhes: lista_erros });
     }
@@ -119,7 +141,13 @@ class AlunoController {
           /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
           "CPF deve estar no formato xxx.xxx.xxx-xx"
         )
-        .required("Preencher Cpf é obrigatório"),
+        .required("Preencher Cpf é obrigatório")
+        .test("unique-cpf", "CPF já existente", async (value) => {
+          const aluno = await Aluno.findOne({
+            where: { cpf: value, matricula: { [Op.ne]: req.params.matricula } },
+          });
+          return !aluno;
+        }),
       telefone: Yup.string().required("Preencher Telefone é obrigatório"),
       endereco: Yup.string().required("Preencher Endereço é obrigatório"),
       nome: Yup.string().required("Preencher Nome é obrigatório"),
@@ -127,17 +155,24 @@ class AlunoController {
       senha: Yup.number().integer().required("Preencher Senha obrigatório"),
     });
 
+    let lista_erros = [];
+
+    // Validar schema
     try {
       await schema.validate(req.body, { abortEarly: false });
     } catch (e) {
-      const validationErrors = e.inner.map((error) => ({
-        campo: error.path,
-        mensagem: error.message,
-      }));
+      // Erros de campos não preenchidos
 
+      if (e.name === "ValidationError") {
+        const erros_validacao = e.inner.map((error) => ({
+          campo: error.path,
+          mensagem: error.message,
+        }));
+        lista_erros = [...lista_erros, ...erros_validacao];
+      }
       return res
         .status(400)
-        .json({ error: "Erro de validação", detalhes: validationErrors });
+        .json({ error: "Erro de validação", detalhes: lista_erros });
     }
 
     const aluno = await Aluno.findByPk(req.params.matricula);
