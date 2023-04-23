@@ -20,7 +20,7 @@ body {
   display: flex;
   flex-direction: column;
   padding-left: 20px;
-  min-height: 90vh; /* define a altura mínima do container como 100% da altura da janela do navegador */
+  min-height: 90vh; 
   margin: 0 auto;
 }
 
@@ -33,11 +33,41 @@ h1 {
   -webkit-text-fill-color: transparent;
 }
 
+p{
+  color: white;
+  font-size: 20px;
+  text-align: left;
+}
+
+.camp-text, .forms{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.camp-text{
+  margin-right: 850px;
+}
+
+.forms{
+  margin-top: 30px;
+  margin-right: 100px;
+}
+
+.required {
+  color: red;
+  text-align: center;
+  margin: 0;
+}
+
+form label, .required{
+  font-weight: bold;
+  font-size: 20px;
+}
 
 form label {
   display: inline-block;
-  font-weight: bold;
-  font-size: 20px;
   color: white;
   padding: 15px;
   vertical-align: top;
@@ -57,69 +87,50 @@ form input[type="password"] {
   margin: 5px 0;
 }
 
-
-.form-name{
-  display: block;
-  margin-right: 20px;
-  float: left;
-}
-
-.form-surname{
-  display: block;
-  float: left;
-}
-
-.form-registration{
-  display: block;
-  clear: both;
-  float: left;
-}
-
-.form-cpf{
-  display: block;
-  clear: both;
-  float: left;
-}
-
-.form-address{
-  display: block;
-  clear: both;
-  float: left;
-}
-
-.form-email{
-  display: block;
-  clear: both;
-  float: left;
-  margin-right: 20px;
-}
-
-
-.form-phone{
-  display: block;
-  float: left;
-}
-
-.form-password{
-  display: block;
-  clear: both;
-  float: left;
-  margin-right: 20px;
-}
-
+.form-name,
+.form-surname,
+.form-address,
+.form-email,
+.form-phone,
+.form-password,
 .form-rep-password{
   display: block;
   float: left;
 }
 
+.form-name,
+.form-email,
+.form-password{
+  margin-right: 20px;
+}
 
-.form-button{
+.form-registration, .form-cpf{
+  display: block;
+  clear: both;
+  float: left;
+}
+
+.form-address,
+.form-email,
+.form-password{
+  clear: both;
+}
+
+.form-button,
+.return-button{
   position: fixed;
   bottom: 20px;
+}
+
+.form-button{
   right: 20px;
 }
 
-#button{
+.return-button{
+  left: 20px;
+}
+
+.btn-return, .record-button{
   background-color: #7df5a6;
   color: white;
   border-color: white;
@@ -135,34 +146,34 @@ form input[type="password"] {
   padding-bottom: 10px;
   padding-right: 50px;
   padding-left: 50px;
+  background-size: 30px;
+  background-repeat: no-repeat;
 }
 
-#button:hover {
+.btn-return:hover, .record-button:hover{
   transform: scale(1.05);
   cursor: pointer;
-  
 }
 
-#button:active {
+.btn-return:active, .record-button:active{
   transform: scale(0.95);
   opacity: 0.8;
 }
 
-
-.required {
-  color: red;
-  font-weight: bold;
-  font-size: 20px;
-  text-align: center;
-  margin: 0;
+.btn-return{
+  background-image: url("../images/return-icon.svg");
+  background-position: left 10px center;
 }
 
-p{
-  color: white;
-  font-size: 20px;
-  text-align: left;
-  margin: 20px;
+.record-button{
+  background-image: url("../images/check-icon.svg");
+  background-position: right 10px center;
 }
+
+
+
+
+
 
 
 

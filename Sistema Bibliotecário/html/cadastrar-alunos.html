@@ -6,9 +6,10 @@
 	<link rel="stylesheet" type="text/css" href="../style/cadastrar-alunos.css">
 </head>
 <body>
+	
 	<div class="container">
 		<h1>Cadastrar Alunos</h1>
-		<div id="forms">
+		<div class="forms">
 			<form action="#" method="POST">
 				<div class="form-name">
 					<label for="nome">Nome <span class="required">*</span></label>
@@ -47,12 +48,15 @@
 					<input type="password" id="repetir-senha" name="repetir-senha" required>
 				</div>
 				<div class="form-button">
-					<input type="submit" value="Gravar" id="button">
+					<input type="submit" value="Gravar" class="record-button">
 				</div>
 			</form>	
 		</div>
-		<div>
+		<div class="camp-text">
 			<p><span class="required">* </span>Campos Obrigatórios</p>
+		</div>
+		<div class="return-button">
+			<a href="../html/pagina-alunos.html"><button class="btn-return">Voltar</button></a>
 		</div>
 	</div>
 </body>
