@@ -6,9 +6,9 @@ const routes = new Router();
 
 // Customers
 routes.get("/alunos", alunos.index);
-routes.get("/alunos/:matricula", alunos.show);
+// routes.get("/alunos/", alunos.show);
 routes.post("/alunos", alunos.create);
-routes.put("/alunos/:matricula", alunos.update);
-routes.delete("/alunos/:matricula", alunos.destroy);
+routes.put("/alunos/", alunos.update);
+routes.delete("/alunos/", alunos.destroy);
 
 export default routes;

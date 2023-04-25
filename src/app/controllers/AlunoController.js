@@ -65,14 +65,14 @@ class AlunoController {
   }
 
   // Recupera um Aluno
-  async show(req, res) {
-    const aluno = await Aluno.findByPk(req.params.matricula);
+  // async show(req, res) {
+  //   const aluno = await Aluno.findByPk(req.params.matricula);
 
-    if (!aluno) {
-      return res.status(404).json();
-    }
-    return res.json(aluno);
-  }
+  //   if (!aluno) {
+  //     return res.status(404).json();
+  //   }
+  //   return res.json(aluno);
+  // }
 
   // Cria um novo Aluno
   async create(req, res) {
@@ -175,7 +175,9 @@ class AlunoController {
         .json({ error: "Erro de validação", detalhes: lista_erros });
     }
 
-    const aluno = await Aluno.findByPk(req.params.matricula);
+    const { matricula } = req.query;
+
+    const aluno = await Aluno.findByPk(matricula);
 
     if (!aluno) {
       return res.status(404).json();
@@ -188,7 +190,9 @@ class AlunoController {
 
   // Exclui um Aluno
   async destroy(req, res) {
-    const aluno = await Aluno.findByPk(req.params.matricula);
+    const { matricula } = req.query;
+
+    const aluno = await Aluno.findByPk(matricula);
 
     if (!aluno) {
       return res.status(404).json();
