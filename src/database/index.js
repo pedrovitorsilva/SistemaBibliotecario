@@ -3,8 +3,9 @@ import Sequelize from "sequelize";
 import config from "../config/database";
 
 import Aluno from "../app/models/Aluno";
+import Livro from "../app/models/Livro";
 
-const models = [Aluno];
+const models = [Aluno, Livro];
 
 class Database {
   constructor() {

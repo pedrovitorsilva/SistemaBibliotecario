@@ -34,5 +34,7 @@ fetch(`http://localhost:3000/alunos?matricula=${matricula}`)
     telefoneElement.value = alunoAtual.telefone;
 
     const senhaElement = document.querySelector("#senha");
-    senhaElement.value = alunoAtual.senha;
+    if (senhaElement) {
+      senhaElement.value = alunoAtual.senha;
+    }
   });

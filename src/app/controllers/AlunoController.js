@@ -6,7 +6,7 @@ import Aluno from "../models/Aluno";
 class AlunoController {
   // Listagem dos Alunos
   async index(req, res) {
-    const { cpf, nome, sobrenome, matricula, sort } = req.query;
+    const { nome, cpf, matricula, sort } = req.query;
 
     const page = req.query.page || 1;
     const limit = req.query.limit || 25;
@@ -28,15 +28,6 @@ class AlunoController {
         ...where,
         nome: {
           [Op.like]: `%${nome}%`,
-        },
-      };
-    }
-
-    if (sobrenome) {
-      where = {
-        ...where,
-        sobrenome: {
-          [Op.like]: `%${sobrenome}%`,
         },
       };
     }
