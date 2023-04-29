@@ -1,59 +1,73 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-	<meta charset="UTF-8">
-	<title>Editar Livros</title>
-	<link rel="stylesheet" type="text/css" href="../style/cadastrar-livros.css">
-	<script src="../js_pages/alunos/editar-livros.js" defer></script>
-</head>
-<body>
-	
-	<div class="container">
-		<h1>Editar Livros</h1>
-		<div class="forms">
-			<form action="#" method="POST">
-				<div class="form-title">
-					<label for="titulo">Título <span class="required">*</span></label>
-					<input type="text" id="titulo" name="titulo" size="35" required>
-				</div>
-				<div class="form-author">
-					<label for="autor">Autor <span class="required">*</span></label>
-					<input type="text" id="autor" name="autor" size="50" required>
-				</div>
-				<div class="form-pub-date">
-					<label for="data">Data de publicação <span class="required">*</span></label>
-					<input type="date" id="data" name="data" size="35" required>
-                </div>
-                <div class="form-registration">
-					<label for="codigo">Código do livro <span class="required">*</span></label>
-					<input type="number" id="codigo" name="codigo" size="10" required>
-				</div>
-				<div class="form-version">
-					<label for="versao">Versão <span class="required">*</span></label>
-					<input type="text" id="versao" name="versao" size="10" required>
-				</div>
-				<div class="form-keywords">
-					<label for="chaves">Palavras-chave <span class="required">*</span></label>
-					<input type="text" id="chaves" name="chaves" size="60" required>
-				</div>
-				<div class="form-resume">
-					<label for="resumo">Resumo <span class="required">*</span></label>
-                    <textarea id="resumo"></textarea>
-                </div>
-                <div class="form-button">
-					<input type="submit" value="Gravar" class="record-button">
-                </div>
-                <div class="form-button">
-					<input type="submit" value="Gravar edições" class="record-button">
-				</div>
-			</form>	
-		</div>
-		<div class="camp-text">
-			<p><span class="required">* </span>Campos Obrigatórios</p>
-		</div>
-		<div class="return-button">
-			<a href="../html/pesquisa-global-livros.html"><button class="btn-return">Voltar</button></a>
-		</div>
-	</div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Editar Livros</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../style/cadastrar-livros.css"
+    /> 
+		<script src="../js_pages/livros/resultado-pesquisa.js" defer></script>
+		<script src="../js_pages/livros/editar-livro.js" defer></script>
+    
+
+  </head>
+  <body>
+    <div class="container">
+      <h1>Editar Livros</h1>
+      <div class="forms">
+        <form action="#" method="POST">
+          <div class="form-title">
+            <label for="titulo">Título <span class="required">*</span></label>
+            <input type="text" id="titulo" name="titulo" size="35" required />
+          </div>
+          <div class="form-author">
+            <label for="autor">Autor <span class="required">*</span></label>
+            <input type="text" id="autor" name="autor" size="50" required />
+          </div>
+          <div class="form-pub-date">
+            <label for="data"
+              >Data de publicação <span class="required">*</span></label
+            >
+            <input type="date" id="data" name="data" size="35" required />
+          </div>
+          <div class="form-registration">
+            <label for="codigo"
+              >Código do livro <span class="required">*</span></label
+            >
+            <input type="number" id="codigo" name="codigo" size="10" required />
+          </div>
+          <div class="form-version">
+            <label for="versao">Versão <span class="required">*</span></label>
+            <input type="text" id="versao" name="versao" size="10" required />
+          </div>
+          <div class="form-keywords">
+            <label for="chaves"
+              >Palavras-chave <span class="required">*</span></label
+            >
+            <input type="text" id="chaves" name="chaves" size="60" required />
+          </div>
+          <div class="form-resume">
+            <label for="resumo">Resumo <span class="required">*</span></label>
+            <textarea id="resumo"></textarea>
+          </div>
+          <div class="form-button">
+            <input type="submit" value="Gravar" class="record-button" />
+          </div>
+          <div class="form-button">
+            <input type="submit" value="Gravar edições" class="record-button" />
+          </div>
+        </form>
+      </div>
+      <div class="camp-text">
+        <p><span class="required">* </span>Campos Obrigatórios</p>
+      </div>
+      <div class="return-button">
+        <a href="../html/pesquisa-editar-livros.html"
+          ><button class="btn-return">Voltar</button></a
+        >
+      </div>
+    </div>
+  </body>
 </html>

@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-console */
 /* eslint-disable no-undef */
-function cadastrar_aluno() {
+function cadastrar_aluno(event) {
   event.preventDefault(); // previne o envio do formulário pelo navegador
 
   const novoAluno = {
