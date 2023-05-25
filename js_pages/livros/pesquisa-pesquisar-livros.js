@@ -18,6 +18,15 @@ form.addEventListener("submit", (event) => {
   fetch(`http://localhost:3000/livros?${termoPesquisa}`)
     .then((response) => response.json())
     .then((users) => {
+      console.log(users);
+
+      if (users.length === 0) {
+        cuteToast({
+          type: "warning",
+          message: "Não há livros cadastrados",
+        });
+      }
+
       tableBody.innerHTML = "";
       users.forEach((livro) => {
         console.log(livro);
@@ -34,6 +43,13 @@ form.addEventListener("submit", (event) => {
         const codeCell = document.createElement("td");
         codeCell.textContent = livro.cod_livro;
         row.appendChild(codeCell);
+
+        const searchLink = document.createElement("a");
+        searchLink.textContent = "Pesquisar";
+        searchLink.href = `../crud/pesquisar-livros.html?cod_livro=${livro.cod_livro}`;
+        const searchCell = document.createElement("td");
+        searchCell.appendChild(searchLink);
+        row.appendChild(searchCell);
 
         tableBody.appendChild(row);
       });

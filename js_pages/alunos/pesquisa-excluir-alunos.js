@@ -17,6 +17,15 @@ form.addEventListener("submit", (event) => {
   fetch(`http://localhost:3000/alunos?${termoPesquisa}`)
     .then((response) => response.json())
     .then((users) => {
+      console.log(users);
+
+      if (users.length === 0) {
+        cuteToast({
+          type: "warning",
+          message: "Não há alunos cadastrados",
+        });
+      }
+
       tableBody.innerHTML = "";
       users.forEach((user) => {
         const row = document.createElement("tr");
@@ -35,7 +44,7 @@ form.addEventListener("submit", (event) => {
 
         const deleteLink = document.createElement("a");
         deleteLink.textContent = "Deletar";
-        deleteLink.href = `../html/excluir-alunos.html?matricula=${user.matricula}`;
+        deleteLink.href = `../crud/excluir-alunos.html?matricula=${user.matricula}`;
         const deleteCell = document.createElement("td");
         deleteCell.appendChild(deleteLink);
         row.appendChild(deleteCell);

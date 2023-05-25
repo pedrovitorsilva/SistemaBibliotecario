@@ -1,0 +1,166 @@
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/montserrat.woff2') format('woff2');
+  unicode-range: U+0100-02AF, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+body {
+  border-top: 66px solid #046123;
+  margin: 0;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+  background-color: #046123;
+  background-image: linear-gradient(to top, #046123, #3a9950);
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+  min-height: 90vh; 
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  background: linear-gradient(to top, #7df5a6, #45fb83);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+p{
+  color: white;
+  font-size: 20px;
+  text-align: left;
+}
+
+.camp-text, .forms{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.camp-text{
+  margin-right: 850px;
+}
+
+.forms{
+  margin-top: 30px;
+  margin-right: 100px;
+}
+
+form label{
+  font-weight: bold;
+  font-size: 20px;
+}
+
+form label {
+  display: inline-block;
+  color: white;
+  padding: 15px;
+  vertical-align: top;
+}
+
+form input[type="text"],
+form input[type="date"],
+form input[type="number"]{
+  display: inline-block;
+  padding: 10px;
+  border: 1px solid #45fb83;
+  border-radius: 50px;
+  background-color: #89bd7e;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  color: black;
+  margin: 5px 0;
+}
+
+.form-bookname,
+.form-book-registration,
+.form-surname,
+.form-registration,
+.form-cpf
+{
+  display: block;
+  float: left;
+}
+
+.form-bookname,
+.form-registration,
+.form-cpf{
+  margin-right: 20px;
+}
+
+.form-deadline, .form-name, .form-surname, .form-cpf{
+  display: block;
+  clear: both;
+  float: left;
+}
+
+.form-name,
+.form-registration{
+  clear: both;
+}
+
+.form-button,
+.return-button{
+  position: fixed;
+  bottom: 20px;
+}
+
+.form-button{
+  right: 20px;
+}
+
+.return-button{
+  left: 20px;
+}
+
+.btn-return{
+  background-color: #7df5a6;
+  color: white;
+  border-color: white;
+  border-style: solid;
+  font-weight: bolder;
+  font-size: 20px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+  text-shadow: -1px -1px 0 #03230E, 1px -1px 0 #03230E, -1px 1px 0 #03230E, 1px 1px 0 #03230E;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 50px;
+  padding-left: 50px;
+  background-size: 30px;
+  background-repeat: no-repeat;
+}
+
+.btn-return:hover, .delete-button:hover{
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.btn-return:active, .delete-button:active{
+  transform: scale(0.95);
+  opacity: 0.8;
+}
+
+.btn-return{
+  background-image: url("../../images/return-icon.svg");
+  background-position: left 10px center;
+}
+
+
+
+
+
+
+
+
+

@@ -1,19 +1,29 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-console */
 /* eslint-disable no-undef */
+
+const alunoFields = {
+  nome: document.getElementById("nome"),
+  sobrenome: document.getElementById("sobrenome"),
+  matricula: document.getElementById("matricula"),
+  cpf: document.getElementById("cpf"),
+  endereco: document.getElementById("endereco"),
+  email: document.getElementById("email"),
+  telefone: document.getElementById("telefone"),
+  senha: document.getElementById("senha"),
+};
+
 function cadastrar_aluno(event) {
   event.preventDefault(); // previne o envio do formulário pelo navegador
 
-  const novoAluno = {
-    nome: document.getElementById("nome").value,
-    sobrenome: document.getElementById("sobrenome").value,
-    matricula: document.getElementById("matricula").value,
-    cpf: document.getElementById("cpf").value,
-    endereco: document.getElementById("endereco").value,
-    email: document.getElementById("email").value,
-    telefone: document.getElementById("telefone").value,
-    senha: document.getElementById("senha").value,
-  };
+  const novoAluno = {};
+  // eslint-disable-next-line no-restricted-syntax
+  for (const [key, field] of Object.entries(alunoFields)) {
+    novoAluno[key] = field.value;
+  }
 
   fetch("http://localhost:3000/alunos", {
     method: "POST",
@@ -23,8 +33,29 @@ function cadastrar_aluno(event) {
     body: JSON.stringify(novoAluno),
   })
     .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.error(error));
+    .then((data) => {
+      console.log("data", data);
+      if (!data.error) {
+        cuteAlert({
+          type: "success",
+          title: "Cadastro do Aluno",
+          message: `Aluno "${nome.value}" cadastrado com Sucesso`,
+        }).then(
+          () => (window.location.href = "../../alunos/crud/pagina-alunos.html")
+        );
+      } else throw data;
+    })
+    .catch((error) => {
+      console.error(error);
+      if (error.detalhes && error.detalhes.length > 0) {
+        error.detalhes.slice(0, 7).forEach(({ mensagem }) => {
+          cuteToast({
+            type: "error",
+            message: mensagem,
+          });
+        });
+      }
+    });
 }
 
 document

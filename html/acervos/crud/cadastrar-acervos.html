@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Cadastrar Acervos</title>
+	<link rel="stylesheet" type="text/css" href="../../../style/acervos/cadastrar-acervos.css">
+	<link rel="icon" href="../../../images/pilha-de-livros.ico">
+
+	<!-- Cute alert -->
+	<link rel="stylesheet" href="../../../cute_alert/cute-alert-style.css">
+	<script src="../../../cute_alert/cute-alert.js"></script>
+
+	<script src="../../../js_pages/acervos/cadastrar-acervos.js" defer></script>
+</head>
+
+<body>
+
+	<div class="container">
+		<h1>Cadastrar Acervos</h1>
+		<span id="sucesso"></span>
+		<div class="forms">
+			<form action="#" method="POST" id="form-aluno">
+				<div class="form-name">
+					<label for="nome">Nome <span class="required">*</span></label>
+					<input type="text" id="nome" name="nome" size="70" required>
+				</div>
+				<div class="form-registration">
+					<label for="codigo">Código do acervo <span class="required">*</span></label>
+					<input type="number" id="cod_acervo" name="codigo" size="10" required>
+				</div>
+				<div class="form-subject">
+					<label for="area">Área do conhecimento <span class="required">*</span></label>
+					<input type="text" id="area_conhecimento" name="area" size="70" required>
+				</div>
+				<div class="form-button">
+					<input type="submit" value="Gravar" class="record-button">
+				</div>
+			</form>
+		</div>
+		<div class="camp-text">
+			<p><span class="required">* </span>Campos Obrigatórios</p>
+		</div>
+		<div class="return-button">
+			<a href="pagina-acervos.html"><button class="btn-return">Voltar</button></a>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -2,11 +2,12 @@ import * as Yup from "yup";
 import { Op } from "sequelize";
 
 import Livro from "../models/Livro";
+import Acervo from "../models/Acervo";
 
 class LivroController {
   // Listagem dos Livros
   async index(req, res) {
-    const { codLivro, titulo, autor, sort } = req.query;
+    const { titulo, autor, codLivro, sort } = req.query;
 
     const page = req.query.page || 1;
     const limit = req.query.limit || 25;
@@ -18,7 +19,7 @@ class LivroController {
       where = {
         ...where,
         codLivro: {
-          [Op.like]: `%${codLivro}%`,
+          [Op.eq]: codLivro,
         },
       };
     }
@@ -60,14 +61,25 @@ class LivroController {
     const schema = Yup.object().shape({
       autor: Yup.string().required("Preencher Autor é obrigatório"),
       resumo: Yup.string().required("Preencher Resumo é obrigatório"),
-      titulo: Yup.string().required("Preencher Título é obrigatório"),
-      data_publicacao: Yup.date().required(
-        "Preencher Data de Publicação é obrigatório"
+      versao: Yup.string().required("Preencher Versão é obrigatório"),
+      cod_livro: Yup.string().required(
+        "Preencher Código de Livro é obrigatório"
       ),
+      data_publicacao: Yup.date()
+        .typeError("Data Inválida")
+        .required("Preencher Data de Publicação é obrigatório"),
       palavras_chave: Yup.string().required(
         "Preencher Palavras Chave é obrigatório"
       ),
-      versao: Yup.string().required("Preencher Versão é obrigatório"),
+      titulo: Yup.string().required("Preencher Título é obrigatório"),
+      cod_acervo: Yup.number()
+        .required("Preencher Código de Acervo é obrigatório")
+        .typeError("O código do acervo só pode ser composto por números")
+        .test("cod_acervo", "Código do acervo não existe", async (value) => {
+          if (!value) return true; // Se o valor não estiver definido, não faz a validação
+          const acervoExistente = await Acervo.findByPk(value);
+          return !!acervoExistente;
+        }),
     });
 
     let lista_erros = [];

@@ -19,6 +19,15 @@ form.addEventListener("submit", (event) => {
   fetch(`http://localhost:3000/livros?${termoPesquisa}`)
     .then((response) => response.json())
     .then((users) => {
+      console.log(users);
+
+      if (users.length === 0) {
+        cuteToast({
+          type: "warning",
+          message: "Não há livros cadastrados",
+        });
+      }
+
       tableBody.innerHTML = "";
       users.forEach((livro) => {
         const row = document.createElement("tr");
@@ -37,7 +46,7 @@ form.addEventListener("submit", (event) => {
 
         const editLink = document.createElement("a");
         editLink.textContent = "Editar";
-        editLink.href = `../html/editar-livros.html?cod_livro=${livro.cod_livro}`;
+        editLink.href = `../crud/editar-livros.html?cod_livro=${livro.cod_livro}`;
         const editCell = document.createElement("td");
         editCell.appendChild(editLink);
         row.appendChild(editCell);

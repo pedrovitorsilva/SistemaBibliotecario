@@ -19,6 +19,15 @@ form.addEventListener("submit", (event) => {
   fetch(`http://localhost:3000/alunos?${termoPesquisa}`)
     .then((response) => response.json())
     .then((users) => {
+      console.log(users);
+
+      if (users.length === 0) {
+        cuteToast({
+          type: "warning",
+          message: "Não há alunos cadastrados",
+        });
+      }
+
       tableBody.innerHTML = "";
       users.forEach((user) => {
         const row = document.createElement("tr");
@@ -37,7 +46,7 @@ form.addEventListener("submit", (event) => {
 
         const editLink = document.createElement("a");
         editLink.textContent = "Editar";
-        editLink.href = `../html/editar-alunos.html?matricula=${user.matricula}`;
+        editLink.href = `../crud/editar-alunos.html?matricula=${user.matricula}`;
         const editCell = document.createElement("td");
         editCell.appendChild(editLink);
         row.appendChild(editCell);

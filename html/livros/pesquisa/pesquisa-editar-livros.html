@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title>Pesquisa Global</title>
+	<link rel="stylesheet" href="../../../style/pesquisa-global.css">
+  <link rel="icon" href="../../../images/pilha-de-livros.ico">
+
+  <!-- Cute alert -->
+	<link rel="stylesheet" href="../../../cute_alert/cute-alert-style.css">
+	<script src="../../../cute_alert/cute-alert.js"></script>
+
+  <script type = "module" src="../../../js_pages/livros/pesquisa-editar-livros.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <div class="forms">
+      <div class="form-search">
+        <form>
+          <label for="busca">Insira uma chave de busca <span class="required">*</span></label>
+          <input type="text" id="busca-titulo" placeholder="Título" size="33">
+          <input type="text" id="busca-autor" placeholder="Autor" size="33">
+          <input type="text" id="busca-codigo" placeholder="Código do Livro" size="33">
+          <button type="submit" class="btn-search">Buscar</button>
+        </form>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Código do Livro</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Resultados da busca serão exibidos aqui -->
+        </tbody>
+      </table>
+    </div>
+    <div class="return-button">
+			<a href="../crud/pagina-livros.html"><button class="btn-return">Voltar</button></a>
+		</div>
+  </div>
+</body>
+

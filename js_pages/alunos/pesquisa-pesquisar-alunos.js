@@ -17,7 +17,17 @@ form.addEventListener("submit", (event) => {
   fetch(`http://localhost:3000/alunos?${termoPesquisa}`)
     .then((response) => response.json())
     .then((users) => {
+      console.log(users);
+
+      if (users.length === 0) {
+        cuteToast({
+          type: "warning",
+          message: "Não há alunos cadastrados",
+        });
+      }
+
       tableBody.innerHTML = "";
+
       users.forEach((user) => {
         const row = document.createElement("tr");
 
@@ -32,6 +42,13 @@ form.addEventListener("submit", (event) => {
         const cpfCell = document.createElement("td");
         cpfCell.textContent = user.cpf;
         row.appendChild(cpfCell);
+
+        const searchLink = document.createElement("a");
+        searchLink.textContent = "Pesquisar";
+        searchLink.href = `../crud/pesquisar-alunos.html?matricula=${user.matricula}`;
+        const searchCell = document.createElement("td");
+        searchCell.appendChild(searchLink);
+        row.appendChild(searchCell);
 
         tableBody.appendChild(row);
       });

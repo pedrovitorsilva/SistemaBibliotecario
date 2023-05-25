@@ -70,18 +70,22 @@ class AlunoController {
     const schema = Yup.object().shape({
       email: Yup.string()
         .email("E-mail inválido")
-        .required("Obrigatório preencher e-mail"),
+        .required("Preencher E-Mail é obrigatório"),
       cpf: Yup.string()
         .matches(
           /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
           "CPF deve estar no formato xxx.xxx.xxx-xx"
         )
         .required("Preencher Cpf é obrigatório"),
+      matricula: Yup.string().required("Preencher Matrícula é obrigatório"),
       telefone: Yup.string().required("Preencher Telefone é obrigatório"),
       endereco: Yup.string().required("Preencher Endereço é obrigatório"),
       nome: Yup.string().required("Preencher Nome é obrigatório"),
       sobrenome: Yup.string().required("Preencher Sobrenome é obrigatório"),
-      senha: Yup.number().integer().required("Preencher Senha obrigatório"),
+      senha: Yup.number()
+        .typeError("A senha só pode ser composta por números")
+        .integer()
+        .required("Preencher Senha obrigatório"),
     });
 
     let lista_erros = [];
@@ -128,22 +132,25 @@ class AlunoController {
         .email("E-mail inválido")
         .required("Obrigatório preencher e-mail"),
       cpf: Yup.string()
+        .required("Preencher Cpf é obrigatório")
         .matches(
           /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
           "CPF deve estar no formato xxx.xxx.xxx-xx"
         )
-        .required("Preencher Cpf é obrigatório")
         .test("unique-cpf", "CPF já existente", async (value) => {
           const aluno = await Aluno.findOne({
             where: { cpf: value, matricula: { [Op.ne]: req.params.matricula } },
           });
           return !aluno;
         }),
-      telefone: Yup.string().required("Preencher Telefone é obrigatório"),
+      telefone: Yup.number().required("Preencher Telefone é obrigatório"),
       endereco: Yup.string().required("Preencher Endereço é obrigatório"),
       nome: Yup.string().required("Preencher Nome é obrigatório"),
       sobrenome: Yup.string().required("Preencher Sobrenome é obrigatório"),
-      senha: Yup.number().integer().required("Preencher Senha obrigatório"),
+      senha: Yup.number()
+        .integer()
+        .required("Preencher Senha obrigatório")
+        .typeError("A senha só pode ser composta por números"),
     });
 
     let lista_erros = [];
@@ -153,7 +160,6 @@ class AlunoController {
       await schema.validate(req.body, { abortEarly: false });
     } catch (e) {
       // Erros de campos não preenchidos
-
       if (e.name === "ValidationError") {
         const erros_validacao = e.inner.map((error) => ({
           campo: error.path,

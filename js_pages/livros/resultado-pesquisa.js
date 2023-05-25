@@ -3,9 +3,9 @@
 /* eslint-disable no-undef */
 
 const urlParams = new URLSearchParams(window.location.search);
-const cod_livro = urlParams.get("cod_livro");
+const codLivro = urlParams.get("codLivro");
 
-fetch(`http://localhost:3000/livros?cod_livro=${cod_livro}`)
+fetch(`http://localhost:3000/livros?cod_livro=${codLivro}`)
   .then((response) => response.json())
   .then((livroAtual) => {
     livroAtual = { ...livroAtual[0] };
@@ -26,6 +26,9 @@ fetch(`http://localhost:3000/livros?cod_livro=${cod_livro}`)
 
     const versionElement = document.querySelector("#versao");
     versionElement.value = livroAtual.versao;
+
+    const acervoElement = document.querySelector("#cod_acervo");
+    acervoElement.value = livroAtual.cod_acervo;
 
     const keywordsElement = document.querySelector("#chaves");
     keywordsElement.value = livroAtual.palavras_chave;

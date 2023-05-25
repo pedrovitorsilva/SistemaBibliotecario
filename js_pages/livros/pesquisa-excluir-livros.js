@@ -19,6 +19,15 @@ form.addEventListener("submit", (event) => {
   fetch(`http://localhost:3000/livros?${termoPesquisa}`)
     .then((response) => response.json())
     .then((users) => {
+      console.log(users);
+
+      if (users.length === 0) {
+        cuteToast({
+          type: "warning",
+          message: "Não há livros cadastrados",
+        });
+      }
+
       tableBody.innerHTML = "";
       users.forEach((livro) => {
         const row = document.createElement("tr");
@@ -37,7 +46,7 @@ form.addEventListener("submit", (event) => {
 
         const deleteLink = document.createElement("a");
         deleteLink.textContent = "Excluir";
-        deleteLink.href = `../html/excluir-livros.html?cod_livro=${livro.cod_livro}`;
+        deleteLink.href = `../crud/excluir-livros.html?cod_livro=${livro.cod_livro}`;
         const deleteCell = document.createElement("td");
         deleteCell.appendChild(deleteLink);
         row.appendChild(deleteCell);

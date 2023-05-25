@@ -15,6 +15,13 @@ class Livro extends Model {
         data_publicacao: Sequelize.DATEONLY,
         palavras_chave: Sequelize.STRING,
         versao: Sequelize.STRING,
+        cod_acervo: {
+          type: Sequelize.INTEGER,
+          references: {
+            model: "acervos",
+            key: "cod_acervo",
+          },
+        },
       },
       {
         sequelize,
